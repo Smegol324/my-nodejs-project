@@ -1,41 +1,31 @@
 pipeline {
     agent any
-
     stages {
-        stage('Declarative: Checkout SCM') {
+        stage('Checkout') {
             steps {
-                checkout scm
+                git 'https://github.com/Smegol324/my-nodejs-project.git'
             }
         }
-
-        stage('Install') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Installing dependencies...'
-                powershell '''
-                    npm install --save-dev webpack-cli
-                '''
+                script {
+                    sh 'npm install'
+                }
             }
         }
-
         stage('Build') {
             steps {
-                echo 'Building project...'
-                powershell '''
-                    npm run build
-                '''
+                script {
+                    sh 'npm run build'
+                }
             }
         }
-
-        stage('Test') {
+        stage('Start') {
             steps {
-                echo 'Running tests...'
+                script {
+                    sh 'npm start'
+                }
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Cleaning up...'
         }
     }
 }
