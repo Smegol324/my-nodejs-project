@@ -1,18 +1,19 @@
 {
   "name": "my-nodejs-project",
   "version": "1.0.0",
-  "description": "Node.js project with Webpack",
-  "main": "index.js",
+  "description": "My Node.js project",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "webpack --config webpack.config.js"
-  },
-  "dependencies": {
-    "webpack": "^5.0.0"
+    "build": "babel app.js -o dist/bundle.js",
+    "start": "node dist/bundle.js"
   },
   "devDependencies": {
-    "webpack-cli": "^4.0.0"
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.0"
   },
-  "author": "Mukhin",
-  "license": "ISC"
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
