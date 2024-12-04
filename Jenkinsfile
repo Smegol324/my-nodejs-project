@@ -1,22 +1,25 @@
 pipeline {
     agent any
+
     stages {
         stage('Install') {
             steps {
                 echo 'Installing dependencies...'
-                sh 'npm install'
+                powershell 'npm install'
             }
         }
-        stage('Stop all') {
+
+        stage('Build') {
             steps {
-                echo 'Stopping all running instances...'
-                sh 'forever stopall || true'
+                echo 'Building project...'
+                powershell 'npm run build'
             }
         }
-        stage('Deploy') {
+
+        stage('Test') {
             steps {
-                echo 'Starting application...'
-                sh 'BUILD_ID=dontKillMe pm2 start app.js'
+                echo 'Running tests...'
+                powershell 'npm test'
             }
         }
     }
