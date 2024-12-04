@@ -3,28 +3,17 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Smegol324/my-nodejs-project.git'
-            }
-        }
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh 'npm install'
-                }
+                bat 'git checkout main'
             }
         }
         stage('Build') {
             steps {
-                script {
-                    sh 'npm run build'
-                }
+                bat '.\\build.bat'
             }
         }
-        stage('Start') {
+        stage('Test') {
             steps {
-                script {
-                    sh 'npm start'
-                }
+                bat 'npm test'
             }
         }
     }
