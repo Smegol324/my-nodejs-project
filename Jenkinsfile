@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Smegol324/my-nodejs-project.git'
+                git branch: 'main', url: 'https://github.com/Smegol324/my-nodejs-project.git'
             }
         }
         stage('Install Dependencies') {
