@@ -1,19 +1,24 @@
+#!/usr/bin/env groovy
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Install') {
             steps {
-                bat 'git checkout main'
+                echo 'Install dependencies..'
+                bat 'npm install'
+                bat 'npm install -g pm2 forever'
             }
         }
-        stage('Build') {
+        stage('Stop all') {
             steps {
-                bat '.\\build.bat'
+                echo 'Stop all..'
+                bat 'forever stopall'
             }
         }
-        stage('Test') {
+        stage('Deploy') {
             steps {
-                bat 'npm test'
+                echo 'Deploying.'
+                bat 'set BUILD_ID=dontKillMe && pm2 start app.js'
             }
         }
     }
